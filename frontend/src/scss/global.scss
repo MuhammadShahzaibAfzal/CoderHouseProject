@@ -1,0 +1,142 @@
+@import "./colors.scss";
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&display=swap");
+
+/* DEFAULT STYLING */
+html {
+  box-sizing: border-box;
+  font-size: 16px; // be default is also 16, explicitly set 16
+}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+.container {
+  width: 1200px;
+  max-width: 90%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  column-gap: 6px;
+  background-color: $primary;
+  color: white;
+  cursor: pointer;
+}
+
+.btnIcon {
+  border: none;
+  outline: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  background-color: $primary;
+}
+
+/* CARD COMPONENT STYLING */
+.card {
+  width: 450px;
+  max-width: 90%;
+  min-height: 200px;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 20px;
+
+  .headingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+
+    h3 {
+      font-size: 22px;
+      font-weight: bold;
+    }
+  }
+
+  .bodyContainer {
+    margin: 20px auto;
+    line-height: 30px;
+    text-align: center;
+    font-size: 18px;
+
+    button {
+      margin: 14px auto;
+    }
+
+    .link {
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 4px;
+      color: $primary;
+    }
+  }
+}
+
+.cardWrapper {
+  width: 100%;
+  height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* HEADER STYLES */
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    text-decoration: none;
+
+    span {
+      font-weight: bold;
+      font-size: 22px;
+    }
+  }
+}

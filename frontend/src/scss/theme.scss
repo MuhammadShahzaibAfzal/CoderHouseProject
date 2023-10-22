@@ -1,0 +1,35 @@
+@import "./colors.scss";
+
+.light {
+  .bgPrimary {
+    background-color: $lightPrimaryBg;
+  }
+  .bgSecondary {
+    background-color: $lightSecondaryBg;
+  }
+  .txtPrimary {
+    color: $lightPrimaryTxt;
+  }
+
+  .txtSecondary {
+    color: $lightSecondaryTxt;
+  }
+}
+
+.dark {
+  .bgPrimary {
+    background-color: $darkPrimaryBg;
+  }
+
+  .bgSecondary {
+    background-color: $darkSecondaryBg;
+  }
+
+  .txtPrimary {
+    color: $darkPrimaryTxt;
+  }
+
+  .txtSecondary {
+    color: $darkSecondaryTxt;
+  }
+}
