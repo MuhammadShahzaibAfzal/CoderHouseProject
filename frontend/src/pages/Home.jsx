@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
   const startRegister = () => {
-    navigate("/register");
+    navigate("/authenticate");
   };
   return (
     <div className="cardWrapper bgPrimary">
