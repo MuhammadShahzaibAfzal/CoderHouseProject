@@ -1,12 +1,41 @@
-import React from "react";
-import { Button, Card } from "../../components";
+import React, { useState } from "react";
+import Phone from "./Phone";
+import Email from "./Email";
+import { AiFillMail } from "react-icons/ai";
+import { BsFillPhoneFill } from "react-icons/bs";
+
+const phoneEmailMap = {
+  phone: Phone,
+  email: Email,
+};
 
 const StepPhoneEmail = ({ onNext }) => {
+  const [type, setType] = useState("phone");
+  const Component = phoneEmailMap[type];
   return (
-    <Card title="Enter Phone Number">
-      Step Phone and Email
-      <Button title="Next" onClick={onNext} />
-    </Card>
+    <div>
+      <div className="tabContainer">
+        <button
+          className={`btn ${type === "phone" && "btnPrimary"} txtPrimary`}
+          onClick={() => {
+            setType("phone");
+          }}
+          style={{ fontSize: "20px" }}
+        >
+          <BsFillPhoneFill />
+        </button>
+        <button
+          className={`btn ${type === "email" && "btnPrimary"} txtPrimary`}
+          onClick={() => {
+            setType("email");
+          }}
+          style={{ fontSize: "20px" }}
+        >
+          <AiFillMail />
+        </button>
+      </div>
+      <Component onNext={onNext} />
+    </div>
   );
 };
 

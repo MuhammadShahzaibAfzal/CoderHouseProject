@@ -1,0 +1,67 @@
+@import "./colors.scss";
+
+.card {
+  width: 450px;
+  max-width: 90%;
+  min-height: 200px;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .headingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+
+    h3 {
+      font-size: 22px;
+      font-weight: bold;
+    }
+  }
+
+  .bodyContainer {
+    margin: 20px auto;
+    line-height: 30px;
+    text-align: center;
+    font-size: 18px;
+
+    button {
+      margin: 14px auto;
+    }
+
+    .link {
+      text-decoration: none;
+      font-weight: bold;
+      margin-left: 4px;
+      color: $primary;
+    }
+  }
+
+  .bottomParagraph {
+    width: 70%;
+    margin: 10px auto;
+    font-size: 16px;
+  }
+}
+
+.cardWrapper {
+  width: 100%;
+  height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 10px;
+  margin-bottom: 10px;
+  margin-right: 13px;
+}

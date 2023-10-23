@@ -1,14 +1,10 @@
 import React from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Toaster } from "react-hot-toast";
 
-import { Authenticate, Home, Activate, Login, Rooms } from "./pages";
+import { Authenticate, Home, Activate, Rooms } from "./pages";
 import { Header } from "./components";
-
-const isAuth = true;
-const user = {
-  isActivated: true,
-};
 
 const App = () => {
   const { theme } = useSelector((state) => state.theme);
@@ -21,7 +17,6 @@ const App = () => {
           <Route path="" element={<GuestRoutes />}>
             <Route index element={<Home />} />
             <Route path="/authenticate" element={<Authenticate />} />
-            <Route path="/login" element={<Login />} />
           </Route>
           {/* SEMI PROTECTED ROUTES */}
           <Route path="/activate" element={<SemiProtectedRoutes />}>
@@ -33,6 +28,7 @@ const App = () => {
             <Route index element={<Rooms />} />
           </Route>
         </Routes>
+        <Toaster />
       </div>
     </div>
   );
@@ -47,10 +43,12 @@ export default App;
 */
 
 const GuestRoutes = () => {
+  const { isAuth } = useSelector((state) => state.auth);
   return isAuth ? <Navigate to="/rooms" /> : <Outlet />;
 };
 
 const SemiProtectedRoutes = () => {
+  const { isAuth, user } = useSelector((state) => state.auth);
   return !isAuth ? (
     <Navigate to="/" />
   ) : user.isActivated ? (
@@ -61,6 +59,7 @@ const SemiProtectedRoutes = () => {
 };
 
 const ProtectedRoutes = () => {
+  const { isAuth, user } = useSelector((state) => state.auth);
   return !isAuth ? (
     <Navigate to="/" />
   ) : !user.isActivated ? (

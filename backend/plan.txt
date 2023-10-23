@@ -1,0 +1,39 @@
+✅ Crypto Module (built in module in node)
+    genrate OTP :  crypto.randomInt(min,max)
+    hash OTP : 
+            const { createHmac } = await import('node:crypto');
+            const secret = 'abcdefg';
+            const hash = createHmac('sha256', secret)
+                        .update('I love cupcakes')
+                        .digest('hex');
+            console.log(hash);
+            // Prints:
+            //   c0fa1bc00531bd78ef38c628449c5102aeabd49b5dc3a2a516ea6ea959d6658e
+
+    Genrate Secret Key : 
+
+        crypto.randomBytes(64).toString("hex")
+
+
+✅ Custom Error Handling
+
+
+✅ OTP LOGIC
+
+    - Frontend : User Enter phone number and request send to backend
+    - Backend : 
+        -Validate Phone number
+        -Genrate OTP
+        -Hash OTP (phone+otp+expires)
+        -Send OTP to mobile
+        -Send Request response with hashOtp and expires
+    - Frontend : Enter OTP and send to the backend for verify
+    - Backend : 
+        - Validate Request (phone,otp,hash)
+        - Split Hash and get hash and expires
+        - Check token is expires or not
+        - Verify OTP : Hashed Otp again and compare with previous hashed otp
+
+
+
+

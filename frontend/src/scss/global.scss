@@ -53,9 +53,13 @@ body {
   display: flex;
   align-items: center;
   column-gap: 6px;
-  background-color: $primary;
   color: white;
+  background-color: transparent;
   cursor: pointer;
+}
+
+.btnPrimary {
+  background-color: $primary;
 }
 
 .btnIcon {
@@ -73,55 +77,15 @@ body {
   background-color: $primary;
 }
 
-/* CARD COMPONENT STYLING */
-.card {
-  width: 450px;
-  max-width: 90%;
-  min-height: 200px;
-  text-align: center;
-  padding: 30px 20px;
-  border-radius: 20px;
-
-  .headingContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 10px;
-
-    h3 {
-      font-size: 22px;
-      font-weight: bold;
-    }
-  }
-
-  .bodyContainer {
-    margin: 20px auto;
-    line-height: 30px;
-    text-align: center;
-    font-size: 18px;
-
-    button {
-      margin: 14px auto;
-    }
-
-    .link {
-      text-decoration: none;
-      font-weight: bold;
-      margin-left: 4px;
-      color: $primary;
-    }
-  }
+.input {
+  outline: none;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  width: 250px;
 }
 
-.cardWrapper {
-  width: 100%;
-  height: calc(100vh - 80px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 /* HEADER STYLES */
-
 nav {
   display: flex;
   align-items: center;

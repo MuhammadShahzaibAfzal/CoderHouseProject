@@ -18,11 +18,6 @@ const Home = () => {
         </p>
 
         <Button title="Get Started" onClick={startRegister} />
-
-        <span className="primary">Have an invite text ?</span>
-        <Link to="/login" className="link">
-          Login
-        </Link>
       </Card>
     </div>
   );

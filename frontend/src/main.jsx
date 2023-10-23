@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import "./scss/global.scss";
 import "./scss/theme.scss";
+import "./scss/cards.scss";
 import { store } from "./store/store.js";
 import { Provider } from "react-redux";
 
