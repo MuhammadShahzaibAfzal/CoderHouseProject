@@ -29,6 +29,27 @@
     line-height: 30px;
     text-align: center;
     font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .avatarWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px solid $primary;
+      margin: 10px 0;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
 
     button {
       margin: 14px auto;
@@ -64,4 +85,13 @@
   column-gap: 10px;
   margin-bottom: 10px;
   margin-right: 13px;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileLabel {
+  color: $primary;
+  cursor: pointer;
 }

@@ -26,7 +26,7 @@ const Phone = ({ onNext }) => {
     <Card title="Enter your phone number" image={phoneImage}>
       <TextInput
         placeholder="Enter your phone"
-        type="number"
+        type="text"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />

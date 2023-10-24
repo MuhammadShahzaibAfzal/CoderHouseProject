@@ -14,3 +14,5 @@ const api = axios.create({
 export const sendOTP = (data) => api.post("/api/auth/send-otp", data);
 
 export const verifyOTP = (data) => api.post("/api/auth/verify-otp", data);
+
+export const activate = (data) => api.post("/api/activate", data);
