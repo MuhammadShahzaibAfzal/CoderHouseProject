@@ -1,9 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 import { APP_PORT, DB_URL } from "./config/index.js";
-import { authRouter, roomRouter } from "./routes/index.js";
+import { activationRouter, authRouter, roomRouter } from "./routes/index.js";
 import errorHandlerMiddleware from "./middlewares/errorHandlerMiddleware.js";
 
 const app = express();
@@ -13,12 +16,21 @@ const corsOptions = {
 };
 
 /* FOR JSON DATA */
-app.use(express.json());
+app.use(express.json({ limit: "8mb" }));
 /* FOR CROSS ORIGIN */
 app.use(cors(corsOptions));
+/* FOR COOKIES */
+app.use(cookieParser());
+/* STATIC  */
+app.use("/storage", express.static("storage"));
+/* ROOT FOLDER PATH */
+const __filename = fileURLToPath(import.meta.url);
+const src = dirname(__filename);
+export const ROOT_PATH = dirname(src);
 
 /* REGISTER ROUTES */
 app.use("/api/auth", authRouter);
+app.use("/api/activate", activationRouter);
 app.use("/api/rooms", roomRouter);
 
 /* ERRO HANDLER MIDDLEWARE */

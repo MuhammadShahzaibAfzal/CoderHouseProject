@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "../config/index.js";
+import RefreshModel from "../models/refreshModel.js";
 
 class TokenService {
   async genrateTokens(payload) {
@@ -13,6 +14,14 @@ class TokenService {
       accessToken,
       refreshToken,
     };
+  }
+
+  async verifyAccessToken(token) {
+    return jwt.verify(token, ACCESS_TOKEN_SECRET);
+  }
+
+  async storeRefreshToken(data) {
+    await RefreshModel.create(data);
   }
 }
 

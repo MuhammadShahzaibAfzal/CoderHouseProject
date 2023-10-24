@@ -1,4 +1,5 @@
 ✅ Crypto Module (built in module in node)
+
     genrate OTP :  crypto.randomInt(min,max)
     hash OTP : 
             const { createHmac } = await import('node:crypto');
@@ -36,4 +37,34 @@
 
 
 
+
+✅ Auth Middleware 
+
+use  cookie parser middleware....
+
+import ErrorHandlerService from "../services/errorHandlerService.js";
+import tokenService from "../services/tokenService.js";
+
+const authMiddleware = async (req, res, next) => {
+  const { accessToken } = req.cookies;
+  try {
+    if (!accessToken) {
+      throw new Error();
+    }
+    const data = await tokenService.verifyAccessToken(accessToken);
+    if (!data) {
+      throw new Error();
+    }
+    req.userData = data;
+    next();
+  } catch (error) {
+    return next(ErrorHandlerService.unAuthorized());
+  }
+};
+
+export default authMiddleware;
+
+
+✅✅ Image is in BASE 64 string format. We need to upload in server in the form of file. We use jimp library for
+this purpose. It can resize our image as well.
 

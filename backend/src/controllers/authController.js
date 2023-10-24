@@ -3,6 +3,7 @@ import hashService from "../services/hashService.js";
 import userService from "../services/userService.js";
 import otpService from "../services/otpService.js";
 import {
+  activationValidationSchema,
   phoneValidationSchema,
   verifyOTPValidationSchema,
 } from "../services/validationService.js";
@@ -71,13 +72,23 @@ class AuthController {
       isActivated: user.isActivated,
     });
 
+    /* SAVE REFRESH TOKEN */
+    try {
+      await tokenService.storeRefreshToken({
+        token: refreshToken,
+        user: user._id,
+      });
+    } catch (error) {
+      return next(error);
+    }
+
     /* SET COOKIES */
     res.cookie("accessToken", accessToken, {
       maxAge: 1000 * 60 * 60, // 1 hour
       httpOnly: true, // not read javascript on frontend, only read in server
     });
 
-    res.cookie("accessToken", refreshToken, {
+    res.cookie("refreshToken", refreshToken, {
       maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
       httpOnly: true, // not read javascript on frontend, only read in server
     });
