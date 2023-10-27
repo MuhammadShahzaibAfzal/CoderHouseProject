@@ -3,11 +3,23 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Toaster } from "react-hot-toast";
 
-import { Authenticate, Home, Activate, Rooms } from "./pages";
+import { Authenticate, Home, Activate, Rooms, Room } from "./pages";
 import { Header } from "./components";
+import useLoadingWithRefresh from "./hooks/useLoadingWithRefresh";
+import Loader from "./components/shared/Loader";
 
 const App = () => {
+  const { loading } = useLoadingWithRefresh();
   const { theme } = useSelector((state) => state.theme);
+  if (loading) {
+    return (
+      <div className={theme}>
+        <div className={`bgPrimary loaderWrapper`}>
+          <Loader message="Loading, please wait...." />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={theme}>
       <div className="bgPrimary txtPrimary">
@@ -26,6 +38,7 @@ const App = () => {
           {/* PRTOECTED ROUTES */}
           <Route path="/rooms" element={<ProtectedRoutes />}>
             <Route index element={<Rooms />} />
+            <Route path=":_id" element={<Room />} />
           </Route>
         </Routes>
         <Toaster />

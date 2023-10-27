@@ -1,6 +1,6 @@
 import React from "react";
 
-const TextInput = ({ placeholder, ...otherProps }) => {
+const TextInput = ({ placeholder, fullWidth, ...otherProps }) => {
   return (
     <div>
       <input
@@ -8,6 +8,7 @@ const TextInput = ({ placeholder, ...otherProps }) => {
         placeholder={placeholder}
         {...otherProps}
         className="input bgInput txtPrimary"
+        style={fullWidth === true ? { width: "100%" } : {}}
       />
     </div>
   );

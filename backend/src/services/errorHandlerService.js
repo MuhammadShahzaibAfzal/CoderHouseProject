@@ -20,6 +20,10 @@ class ErrorHandlerService extends Error {
   static forbidden(message = "Not Allowed") {
     return new ErrorHandlerService(403, message);
   }
+
+  static validationError(message = "All fields are required") {
+    return new ErrorHandlerService(422, message);
+  }
 }
 
 export default ErrorHandlerService;

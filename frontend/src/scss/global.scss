@@ -3,8 +3,10 @@
 
 /* DEFAULT STYLING */
 html {
-  box-sizing: border-box;
   font-size: 16px; // be default is also 16, explicitly set 16
+}
+* {
+  box-sizing: border-box;
 }
 body,
 h1,
@@ -47,7 +49,7 @@ body {
   border: none;
   outline: none;
   padding: 12px 20px;
-  border-radius: 4px;
+  border-radius: 25px;
   text-transform: uppercase;
   font-weight: bold;
   display: flex;
@@ -61,7 +63,14 @@ body {
 .btnPrimary {
   background-color: $primary;
 }
+.btnSecondary {
+  background-color: $secondary;
+  transition: 0.4s ease-in all;
 
+  &:hover {
+    background-color: #00913a;
+  }
+}
 .btnIcon {
   border: none;
   outline: none;
@@ -102,5 +111,55 @@ nav {
       font-weight: bold;
       font-size: 22px;
     }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+
+    button {
+      margin: 0 10px;
+    }
+
+    .avatarLink {
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+      text-decoration: none;
+      h3 {
+        font-weight: bold;
+      }
+      .avatarWrapper {
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid $primary;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+.loaderWrapper {
+  height: 100vh;
+}
+
+.loaderMessage {
+  font-weight: bold;
+}
+
+.loaderSpinner {
+  margin: 14px 0;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
   }
 }

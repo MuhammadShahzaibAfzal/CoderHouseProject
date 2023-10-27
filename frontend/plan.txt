@@ -61,3 +61,71 @@ function captureImage(e) {
       dispatch(setAvatar(fileReader.result));
     };
   }
+ 
+✅ Optimize SVG and beutify
+    Website name is svgomg
+
+
+✅✅✅✅✅✅✅✅✅✅✅ webRTC ✅✅✅✅✅✅✅✅✅✅✅
+
+Client 1 : 
+  step1 : connection create
+    const peerConnection = new RTCPeerConnection();
+  step2 : create data channel
+    const dataChannel = peerConnection.createDataChannel("bigdatachannel");
+    // listners
+    dataChannel.onopen = ()=>{console.log("connection opend")}
+    dataChannel.onmessage = (e) => {console.log("Message : " + e.data)};
+
+  step3 : onicecandidate
+    peerConnection.onicecandidate = () => { console.log("local description : " + JSON.stringify(peerConnection.localDescription))}
+
+  step4 : create offer
+    const offer = await peerConnection.createOffer();
+  
+  step5 : set local description 
+    peerConnection.setLocalDescription(offer);
+
+  step6:
+    get answere from Client 2 
+
+    const answere = {};
+
+    await peerConnection.setRemoteDescription(answere);
+
+  set7 : send message
+  dataChannel.send("Hello from Browser one");
+
+Client 2 : 
+  step1 : connection create
+      const peerConnection = new RTCPeerConnection();
+  step2 : 
+    const offer ={} // client1 offer
+
+  step3: onicecandidate
+    peerConnection.onicecandidate = () => {console.log("ice candidate : ", JSON.stringify(peerConection.localDescription))}
+  
+  step4 : 
+    await peerConnection.setRemoteDescription(offer);
+
+  step5 : dataChannel
+
+    let datachannel;
+
+    peerConnection.ondatachannel = (e) => {
+      datachannel = e.channel;
+      datachannel.onopen = () => {
+        console.log("open connection");
+      };
+      datachannel.onmessage = (e) => {
+        console.log("message : ", e.data);
+      };
+    };
+
+  step6 : Create answeree
+  const answere = await peerConnection.createAnswer()
+
+  peerConnection.setLocalDescription(answere);
+
+  copy and paste this browser data and setRemoteDescription in client1;
+

@@ -33,6 +33,9 @@ class AuthController {
     //   return next(error);
     // }
 
+    console.log("====================================");
+    console.log(otp);
+    console.log("====================================");
     return res.status(200).json({ otp, hash: `${hashOtp}.${expires}`, phone });
   }
 
@@ -94,6 +97,81 @@ class AuthController {
     });
 
     return res.json({ isAuth: true, user });
+  }
+
+  async refresh(req, res, next) {
+    /* GET TOKEN FROM COOKIES */
+    const { refreshToken: refreshTokenFromCookie } = req.cookies;
+
+    /* VERIFY REFRESH TOKEN */
+    let userData;
+    try {
+      userData = await tokenService.verifyRefreshToken(refreshTokenFromCookie);
+    } catch (error) {
+      return next(ErrorHandlerService.unAuthorized("Invalid token"));
+    }
+
+    /* CHECK TOKEN IS IN DB */
+    try {
+      const isExist = await tokenService.findRefreshToken({
+        user: userData._id,
+        token: refreshTokenFromCookie,
+      });
+      if (!isExist) {
+        return next(ErrorHandlerService.unAuthorized("Invalid token"));
+      }
+    } catch (error) {
+      return next(error);
+    }
+
+    /* CHECK IF VALID USER CONFIRM */
+    let user;
+    try {
+      user = await userService.findUser({ _id: userData._id });
+      if (!user) {
+        return next(ErrorHandlerService.notFound("Not Found"));
+      }
+    } catch (error) {
+      return next(error);
+    }
+    /* GENRATE TOKENS */
+    const { accessToken, refreshToken } = await tokenService.genrateTokens({
+      _id: userData._id,
+    });
+
+    /* UPDATE REFRESH TOKEN */
+    try {
+      await tokenService.updateRefreshToken(userData._id, refreshToken);
+    } catch (error) {
+      return next(error);
+    }
+    /* SET COOKIES */
+    res.cookie("accessToken", accessToken, {
+      maxAge: 1000 * 60 * 60, // 1 hour
+      httpOnly: true, // not read javascript on frontend, only read in server
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
+      httpOnly: true, // not read javascript on frontend, only read in server
+    });
+
+    return res.json({ isAuth: true, user });
+  }
+
+  async logout(req, res, next) {
+    const { refreshToken } = req.cookies;
+    try {
+      /* REMOVE REFRESH TOKEN FROM DB */
+      await tokenService.removeRefreshToken(refreshToken);
+      /* DELETE COOKIES */
+      res.clearCookie("refreshToken");
+      res.clearCookie("accessToken");
+
+      res.status(200).json({ isAuth: false, user: null });
+    } catch (error) {
+      next(error);
+    }
   }
 }
 

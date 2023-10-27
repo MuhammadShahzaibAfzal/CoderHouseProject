@@ -1,0 +1,186 @@
+@import "./colors.scss";
+
+.roomsContainer {
+  width: 100%;
+  min-height: calc(100vh - 90px);
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .left {
+      display: flex;
+      align-items: center;
+
+      .heading {
+        font-weight: bold;
+        font-size: 22px;
+        margin-right: 10px;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -6px;
+          left: 0;
+          width: 60%;
+          height: 4px;
+          background-color: $primary;
+        }
+      }
+
+      .searchBox {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 25px;
+        width: 300px;
+        column-gap: 2px;
+        margin-left: 10px;
+
+        input {
+          background-color: transparent;
+          outline: none;
+          width: 90%;
+          border: none;
+        }
+      }
+    }
+
+    .right {
+    }
+  }
+
+  .roomsList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+  }
+}
+
+.roomCard {
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  h3 {
+    font-weight: bold;
+  }
+
+  .speakersWrapper {
+    margin-top: 10px;
+    .avatarsWrapper {
+      display: flex;
+      position: relative;
+      img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid $primary;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        &:last-child {
+          top: 20px;
+          left: 20px;
+        }
+      }
+    }
+
+    .singleAvatarWrapper {
+      img {
+        position: initial;
+      }
+    }
+    .nameWrapper {
+      display: flex;
+      align-items: center;
+      column-gap: 7px;
+      margin-left: 100px;
+      text-align: end;
+
+      span {
+        margin: 5px 0;
+      }
+    }
+  }
+
+  .singleSpeakerWrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .peopleCount {
+    text-align: end;
+    margin-top: 15px;
+    span {
+      margin-right: 4px;
+      font-weight: bold;
+    }
+  }
+}
+
+.modelWrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(0, 0, 0, 0.5);
+
+  .modelBody {
+    border-radius: 20px;
+    width: 50%;
+    max-width: 500px;
+    min-height: 400px;
+    position: relative;
+    h3 {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .close {
+      position: absolute;
+      top: 13px;
+      right: 13px;
+      cursor: pointer;
+    }
+
+    .modelHeader {
+      padding: 30px;
+      border-bottom: 1px solid #262626;
+
+      .roomTypes {
+        display: flex;
+        justify-content: space-between;
+        column-gap: 14px;
+        margin: 10px 0;
+
+        .typeBox {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          width: 100%;
+          row-gap: 10px;
+          padding: 10px 20px;
+          border-radius: 20px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .modelFooter {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

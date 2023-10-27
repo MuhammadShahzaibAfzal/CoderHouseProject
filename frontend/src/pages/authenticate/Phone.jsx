@@ -14,11 +14,15 @@ const Phone = ({ onNext }) => {
   async function submit() {
     // server request
     try {
+      if (!phone) {
+        toast.error("Please enter phone number first !");
+        return;
+      }
       const { data } = await sendOTP({ phone });
       dispatch(setOtp(data));
-      console.log(data);
       onNext();
     } catch (error) {
+      console.log(error);
       toast.error(error?.response?.data?.message);
     }
   }

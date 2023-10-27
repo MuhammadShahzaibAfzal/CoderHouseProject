@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import defaultAvatar from "../../assets/monkey-avatar.png";
@@ -6,11 +6,13 @@ import monkeyEmoji from "../../assets/monkey-emoji.png";
 import { setAvatar } from "../../store/slices/activateSlice";
 import { activate } from "../../http";
 import { setAuth } from "../../store/slices/authSlice";
+import Loader from "../../components/shared/Loader";
 
 const StepAvatar = () => {
   const { name, avatar } = useSelector((state) => state.activate);
   const [image, setImage] = useState(avatar ? avatar : defaultAvatar);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   function captureImage(e) {
     const file = e.target.files[0];
@@ -24,13 +26,19 @@ const StepAvatar = () => {
   }
 
   async function submit() {
+    setLoading(true);
     try {
       const { data } = await activate({ name, avatar });
       dispatch(setAuth(data));
-      console.log(data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
+  }
+
+  if (loading) {
+    return <Loader message="Activation  in progress..." />;
   }
 
   return (

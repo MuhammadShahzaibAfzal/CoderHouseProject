@@ -13,17 +13,26 @@ const StepOTP = ({ onNext }) => {
   const dispatch = useDispatch();
 
   async function submit() {
-    try {
-      const { data } = await verifyOTP({
-        phone,
-        hash,
-        otp,
-      });
-      dispatch(setAuth(data));
-      console.log(data);
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
+    if (!otp) {
+      toast.error("Please enter otp first !");
+      return;
     }
+    const promise = verifyOTP({
+      phone,
+      hash,
+      otp,
+    });
+    toast.promise(promise, {
+      loading: "Verifying...",
+      success: (data) => {
+        dispatch(setAuth(data?.data));
+        return "OTP verified";
+      },
+      error: (err) => {
+        console.log(err);
+        return err?.response?.data?.message || "Something went wrong !";
+      },
+    });
   }
   return (
     <Card title="Enter the code we just texted you" image={lockImage}>
